@@ -17,7 +17,8 @@ jobs:
 
       - name: Pull and update submodules recursively
         run: |
-          cd test-github-actions
+          pwd
+          ls
           git submodule update --init --recursive
           git submodule update --recursive --remote
 
