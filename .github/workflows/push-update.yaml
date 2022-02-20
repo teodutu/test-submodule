@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with: 
-          repository: security-summer-school/security-summer-school.github.io
+          repository: teodutu/test-github-actions
           token: ${{ secrets.TEST_SUBMODULES }}
 
       - name: Pull and update submodules recursively
