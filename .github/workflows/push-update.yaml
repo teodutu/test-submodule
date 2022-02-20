@@ -1,0 +1,29 @@
+name: Push submodule updates to parent repo
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with: 
+          repository: security-summer-school/security-summer-school.github.io
+          token: ${{ secrets.TEST_SUBMODULES }}
+
+      - name: Pull and update submodules recursively
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+
+      - name: Commit and push
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions - update submodules"
+          git add --all
+          git commit -m "Update submodules" || echo "No changes to commit"
+          git push
